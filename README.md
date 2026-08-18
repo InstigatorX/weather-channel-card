@@ -81,6 +81,7 @@ The browser sends the configured ZIP/postal code to the Open-Meteo geocoding ser
 ## Troubleshooting
 
 - If the card says that the custom element does not exist, verify `/hacsfiles/weather-channel-card/weather-channel-card.js` under **Settings → Dashboards → Resources**, then refresh the browser cache.
+- If bundled photographs do not appear, update to `v1.1.1` or newer and use HACS → **Redownload** so the release image assets are installed.
 - If a ZIP is not found, try a nearby ZIP or set the correct `country_code`.
 - Optional alert integrations use different entity IDs. Open **Developer Tools → States** to find yours.
 
