@@ -21,5 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Build embedded backgrounds
+        run: node scripts/build.mjs
       - name: Check JavaScript syntax
         run: node --check dist/weather-channel-card.js

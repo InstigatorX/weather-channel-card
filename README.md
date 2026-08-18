@@ -2,7 +2,7 @@
 
 ![Weather Channel Card preview](images/preview.svg)
 
-A responsive Weather Channel-inspired Home Assistant dashboard card. Enter a ZIP code and the card loads current conditions and an hourly forecast directly from Open-Meteo—no weather integration, API key, YAML package, or other custom card required. Six original photographic backgrounds are bundled and selected automatically for clear day, clear night, cloudy, rain, snow, and thunderstorm conditions.
+A responsive Weather Channel-inspired Home Assistant dashboard card. Enter a ZIP code and the card loads current conditions and an hourly forecast directly from Open-Meteo—no weather integration, API key, YAML package, or other custom card required. Six original photographic backgrounds are embedded directly in the card and selected automatically for clear day, clear night, cloudy, rain, snow, and thunderstorm conditions.
 
 ## Install with HACS
 
@@ -81,7 +81,7 @@ The browser sends the configured ZIP/postal code to the Open-Meteo geocoding ser
 ## Troubleshooting
 
 - If the card says that the custom element does not exist, verify `/hacsfiles/weather-channel-card/weather-channel-card.js` under **Settings → Dashboards → Resources**, then refresh the browser cache.
-- If bundled photographs do not appear, update to `v1.1.1` or newer and use HACS → **Redownload** so the release image assets are installed.
+- If bundled photographs do not appear, update to `v1.2.0` or newer and use HACS → **Redownload**. From v1.2.0 onward the photographs are embedded in the JavaScript and require no separate image files or URLs.
 - If a ZIP is not found, try a nearby ZIP or set the correct `country_code`.
 - Optional alert integrations use different entity IDs. Open **Developer Tools → States** to find yours.
 
