@@ -1,4 +1,9 @@
-/* Weather Channel Card v1.0.1 | MIT License */
+/* Weather Channel Card v1.1.0 | MIT License */
+
+const weatherChannelScript = [...document.scripts].find(script => script.src.includes("/weather-channel-card.js"));
+const weatherChannelBaseUrl = weatherChannelScript
+  ? new URL(".", weatherChannelScript.src).href
+  : "/hacsfiles/weather-channel-card/";
 
 class WeatherChannelCard extends HTMLElement {
   constructor() {
@@ -154,20 +159,22 @@ class WeatherChannelCard extends HTMLElement {
     const groups = this.config?.backgrounds || {};
     let group = isDay ? "clear_day" : "clear_night";
     if (code >= 95) group = "thunderstorm";
-    else if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) group = "rain";
+    else if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) group = "rain";
     else if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) group = "snow";
     else if (code >= 3) group = "cloudy";
-    const image = groups[group] || this.config?.background_url;
+    const filenames = { clear_day: "clear-day.jpg", clear_night: "clear-night.jpg", cloudy: "cloudy.jpg", rain: "rain.jpg", snow: "snow.jpg", thunderstorm: "thunderstorm.jpg" };
+    const image = groups[group] || this.config?.background_url || `${weatherChannelBaseUrl}backgrounds/${filenames[group]}`;
     const overlay = "linear-gradient(90deg,rgba(3,22,48,.96),rgba(5,35,69,.87) 46%,rgba(7,37,70,.48))";
+    let fallback = "linear-gradient(130deg,#04376c,#247fba 60%,#8ecae6)";
+    if (group === "thunderstorm") fallback = "linear-gradient(120deg,#07111e,#24364b 52%,#765b73)";
+    else if (group === "rain") fallback = "linear-gradient(125deg,#061b32,#254c65 52%,#647986)";
+    else if (group === "snow") fallback = "linear-gradient(125deg,#17334f,#7798ad 55%,#d5e6ee)";
+    else if (!isDay) fallback = "linear-gradient(130deg,#020817,#102b4d 60%,#3c526d)";
     if (image && /^(https?:\/\/|\/local\/|\/hacsfiles\/)/.test(image)) {
       const safe = encodeURI(image).replace(/["'()\\]/g, char => `%${char.charCodeAt(0).toString(16)}`);
-      return `${overlay},url("${safe}") center/cover no-repeat`;
+      return `${overlay},url("${safe}") center/cover no-repeat,${fallback}`;
     }
-    if (group === "thunderstorm") return "linear-gradient(120deg,#07111e,#24364b 52%,#765b73)";
-    if (group === "rain") return "linear-gradient(125deg,#061b32,#254c65 52%,#647986)";
-    if (group === "snow") return "linear-gradient(125deg,#17334f,#7798ad 55%,#d5e6ee)";
-    if (!isDay) return "radial-gradient(circle at 78% 18%,#dce8ff 0 2%,transparent 3%),linear-gradient(130deg,#020817,#102b4d 60%,#3c526d)";
-    return "radial-gradient(circle at 78% 18%,#fff8bb 0 5%,#ffd36b 7%,transparent 18%),linear-gradient(130deg,#04376c,#247fba 60%,#8ecae6)";
+    return fallback;
   }
 
   _alerts(feels) {
@@ -261,4 +268,4 @@ window.customCards.push({
   preview: true,
 });
 
-console.info("%c WEATHER-CHANNEL-CARD %c v1.0.1 ", "color:#fff;background:#1261a0;font-weight:700", "color:#1261a0;background:#fff");
+console.info("%c WEATHER-CHANNEL-CARD %c v1.1.0 ", "color:#fff;background:#1261a0;font-weight:700", "color:#1261a0;background:#fff");

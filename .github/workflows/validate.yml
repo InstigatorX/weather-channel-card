@@ -22,4 +22,4 @@ jobs:
         with:
           node-version: 22
       - name: Check JavaScript syntax
-        run: node --check weather-channel-card.js
+        run: node --check dist/weather-channel-card.js

@@ -2,7 +2,7 @@
 
 ![Weather Channel Card preview](images/preview.svg)
 
-A responsive Weather Channel-inspired Home Assistant dashboard card. Enter a ZIP code and the card loads current conditions and an hourly forecast directly from Open-Meteo—no weather integration, API key, YAML package, or other custom card required.
+A responsive Weather Channel-inspired Home Assistant dashboard card. Enter a ZIP code and the card loads current conditions and an hourly forecast directly from Open-Meteo—no weather integration, API key, YAML package, or other custom card required. Six original photographic backgrounds are bundled and selected automatically for clear day, clear night, cloudy, rain, snow, and thunderstorm conditions.
 
 ## Install with HACS
 
@@ -47,6 +47,7 @@ update_interval: 600
 title: My Local Weather
 alerts_entity: sensor.nws_alerts_alerts
 lightning_entity: sensor.blitzortung_lightning_distance
+# Optional overrides for the bundled photographs:
 background_url: /local/weather/default.jpg
 backgrounds:
   clear_day: /local/weather/clear-day.jpg
@@ -68,14 +69,14 @@ backgrounds:
 | `title` | Location name | Optional heading override. |
 | `alerts_entity` | — | Optional official-alert sensor, usually `sensor.nws_alerts_alerts`. |
 | `lightning_entity` | — | Optional lightning-distance sensor. |
-| `background_url` | — | Default `/local/`, `/hacsfiles/`, or HTTPS image. |
-| `backgrounds` | — | Optional images selected for six condition groups. |
+| `background_url` | Bundled image | Optional default `/local/`, `/hacsfiles/`, or HTTPS override. |
+| `backgrounds` | Bundled images | Optional overrides for any of the six condition groups. |
 
 The heat-risk banner is computed from apparent temperature and is not presented as an official advisory. Official warnings only appear when `alerts_entity` is configured and active.
 
 ## Data and privacy
 
-The browser sends the configured ZIP/postal code to the Open-Meteo geocoding service, then requests weather for the returned coordinates. No API key is required. Review the [Open-Meteo terms](https://open-meteo.com/en/terms) for your use case.
+The browser sends the configured ZIP/postal code to the Open-Meteo geocoding service, then requests weather for the returned coordinates. No API key is required. Review the [Open-Meteo terms](https://open-meteo.com/en/terms) for your use case. The bundled backgrounds were generated specifically for this project and contain no third-party stock photography.
 
 ## Troubleshooting
 
