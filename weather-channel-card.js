@@ -1,4 +1,4 @@
-/* Weather Channel Card v1.0.0 | MIT License */
+/* Weather Channel Card v1.0.1 | MIT License */
 
 class WeatherChannelCard extends HTMLElement {
   constructor() {
@@ -174,7 +174,15 @@ class WeatherChannelCard extends HTMLElement {
     const alerts = [];
     const official = this._entity(this.config?.alerts_entity);
     if (official && !["0", "none", "unknown", "unavailable", ""].includes(String(official.state).toLowerCase())) {
-      alerts.push({ type: "official", text: official.attributes?.title || official.attributes?.headline || official.attributes?.event || `${official.state} active alert(s)` });
+      const details = official.attributes?.Alerts;
+      const first = Array.isArray(details) ? details[0] : null;
+      const more = Array.isArray(details) && details.length > 1 ? ` (+${details.length - 1} more)` : "";
+      alerts.push({
+        type: "official",
+        text: first?.Headline || first?.Event
+          ? `${first.Headline || first.Event}${more}`
+          : official.attributes?.title || official.attributes?.headline || official.attributes?.event || `${official.state} active alert(s)`,
+      });
     }
     const lightning = this._entity(this.config?.lightning_entity);
     if (lightning && !["none", "unknown", "unavailable", ""].includes(String(lightning.state).toLowerCase())) {
@@ -253,4 +261,4 @@ window.customCards.push({
   preview: true,
 });
 
-console.info("%c WEATHER-CHANNEL-CARD %c v1.0.0 ", "color:#fff;background:#1261a0;font-weight:700", "color:#1261a0;background:#fff");
+console.info("%c WEATHER-CHANNEL-CARD %c v1.0.1 ", "color:#fff;background:#1261a0;font-weight:700", "color:#1261a0;background:#fff");

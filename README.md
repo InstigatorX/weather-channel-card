@@ -45,7 +45,7 @@ units: imperial
 forecast_hours: 8
 update_interval: 600
 title: My Local Weather
-alerts_entity: sensor.nws_alerts
+alerts_entity: sensor.nws_alerts_alerts
 lightning_entity: sensor.blitzortung_lightning_distance
 background_url: /local/weather/default.jpg
 backgrounds:
@@ -66,7 +66,7 @@ backgrounds:
 | `forecast_hours` | `8` | Number of hourly tiles, from 4 through 12. |
 | `update_interval` | `600` | Refresh period in seconds; minimum 300. |
 | `title` | Location name | Optional heading override. |
-| `alerts_entity` | — | Optional official-alert sensor. |
+| `alerts_entity` | — | Optional official-alert sensor, usually `sensor.nws_alerts_alerts`. |
 | `lightning_entity` | — | Optional lightning-distance sensor. |
 | `background_url` | — | Default `/local/`, `/hacsfiles/`, or HTTPS image. |
 | `backgrounds` | — | Optional images selected for six condition groups. |
